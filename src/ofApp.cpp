@@ -64,7 +64,8 @@ void ofApp::draw(){
 	}
 
 	ofSetColor(230);	
-	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.", 10, 20);
+	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.\nPress A to pause, then again to unpause", 10, 20);
+
 }
 
 //--------------------------------------------------------------
@@ -89,6 +90,25 @@ void ofApp::keyPressed(int key){
 		
 	if( key == ' ' ){
 		resetParticles();
+	}
+	if( currentMode == PARTICLE_MODE_PAUSE ){
+			key = 'a';
+		
+		
+	}
+
+	if( key == 'a' || key == 'A'){
+		//Replaces the current mode with pause, turning particles white
+		if( currentMode != PARTICLE_MODE_PAUSE){
+			previousMode = currentMode;
+			currentMode = PARTICLE_MODE_PAUSE;
+		}
+		//Sets the mode back to the original after pressing a to play
+		else{
+		
+			currentMode = previousMode;
+		}
+
 	}
 }
 

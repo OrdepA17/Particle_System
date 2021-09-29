@@ -135,7 +135,7 @@ void Particle::update(){
 		}
 		
 	}
-	
+			else if(mode==PARTICLE_MODE_PAUSE) {vel*=0;}
 	
 	// UPDATE OUR POSITION
 	
