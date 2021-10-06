@@ -28,9 +28,11 @@ class ofApp : public ofBaseApp{
 		particleMode currentMode;
 		string currentModeStr; 
 		particleMode previousMode;
+		bool record = false;
 
 		vector <Particle> p;
 		vector <glm::vec3> attractPoints;
 		vector <glm::vec3> attractPointsWithMovement;
-		
+		vector <char> rec;
+		ofTrueTypeFont Size;
 };

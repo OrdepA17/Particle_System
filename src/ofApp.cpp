@@ -43,6 +43,7 @@ void ofApp::update(){
 		attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
 		attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
 	}	
+	
 }
 
 //--------------------------------------------------------------
@@ -63,8 +64,12 @@ void ofApp::draw(){
 		}
 	}
 
+	if(record){
+		ofDrawBitmapString("Recording", ofGetWidth() - 90, ofGetHeight() - 750);
+	}
+
 	ofSetColor(230);	
-	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.\nPress A to pause, then again to unpause\nPress I or D to alter the sizes.\nPress F or S to alter the speeds.", 10, 20);
+	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.\nPress A to pause, then again to unpause\nPress I or D to alter the sizes.\nPress F or S to alter the speeds.\nPress R to record.", 10, 20);
 
 }
 
@@ -72,29 +77,33 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
 	if( key == '1'){
 		currentMode = PARTICLE_MODE_ATTRACT;
-		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 		
+		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 
+		if(record) rec.push_back(key);		
 	}
 	if( key == '2'){
 		currentMode = PARTICLE_MODE_REPEL;
-		currentModeStr = "2 - PARTICLE_MODE_REPEL: repels from mouse"; 				
+		currentModeStr = "2 - PARTICLE_MODE_REPEL: repels from mouse"; 
+		if(record) rec.push_back(key);				
 	}
 	if( key == '3'){
 		currentMode = PARTICLE_MODE_NEAREST_POINTS;
-		currentModeStr = "3 - PARTICLE_MODE_NEAREST_POINTS:"; 						
+		currentModeStr = "3 - PARTICLE_MODE_NEAREST_POINTS:"; 
+		if(record) rec.push_back(key);						
 	}
 	if( key == '4'){
 		currentMode = PARTICLE_MODE_NOISE;
-		currentModeStr = "4 - PARTICLE_MODE_NOISE: snow particle simulation"; 						
+		currentModeStr = "4 - PARTICLE_MODE_NOISE: snow particle simulation";
+		if(record) rec.push_back(key); 						
 		resetParticles();
 	}	
 		
 	if( key == ' ' ){
+		if(record) rec.push_back(key);
 		resetParticles();
 	}
 	if( currentMode == PARTICLE_MODE_PAUSE ){
-			key = 'a';
-		
-		
+		key = 'a';
+		if(record) rec.push_back(key);
 	}
 
 	if( key == 'a' || key == 'A'){
@@ -102,13 +111,13 @@ void ofApp::keyPressed(int key){
 		if( currentMode != PARTICLE_MODE_PAUSE){
 			previousMode = currentMode;
 			currentMode = PARTICLE_MODE_PAUSE;
+			if(record) rec.push_back(key);
 		}
 		//Unpauses the program 
 		else{
-		
 			currentMode = previousMode;
+			if(record) rec.push_back(key);
 		}
-
 	}
 
 	if ( key == 'i' || key == 'I'){
@@ -116,6 +125,7 @@ void ofApp::keyPressed(int key){
 		while ( x < p.size()){
 			p[x].increaseSize();
 			x++;
+			if(record) rec.push_back(key);
 		}
 	}
 
@@ -124,14 +134,22 @@ void ofApp::keyPressed(int key){
 		while ( x < p.size()){
 			p[x].decreaseSize();
 			x++;
+			if(record) rec.push_back(key);
 		}
 	}
 	if(key=='f'|| key=='F'){
 		speedIncrease();
+		if(record) rec.push_back(key);
 	}
 
 	if(key=='s'|| key=='S'){
 		speedDecrease();
+		if(record) rec.push_back(key);
+	}
+
+	if(key == 'r' || key == 'R'){
+		record = !record;
+		if(record) rec.clear();
 	}
 }
 
