@@ -110,6 +110,22 @@ void ofApp::keyPressed(int key){
 		}
 
 	}
+
+	if ( key == 'i' || key == 'I'){
+		int x = 0;
+		while ( x < p.size()){
+			p[x].increaseSize();
+			x++;
+		}
+	}
+
+	if ( key == 'd' || key == 'D'){
+		int x = 0;
+		while ( x < p.size()){
+			p[x].decreaseSize();
+			x++;
+		}
+	}
 }
 
 //--------------------------------------------------------------

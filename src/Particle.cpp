@@ -181,3 +181,11 @@ if( mode == PARTICLE_MODE_ATTRACT ){
 	ofDrawCircle(pos.x, pos.y, scale * 4.0);
 }
 
+//--------------------------------------------------------------------
+void Particle::increaseSize(){
+	scale = scale * 3;
+}
+
+void Particle::decreaseSize(){
+	scale = scale / 3;
+}

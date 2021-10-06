@@ -21,6 +21,8 @@ class Particle{
 		void reset();
 		void update();
 		void draw();		
+		void increaseSize();
+		void decreaseSize();
 		
 		glm::vec3 pos;
 		glm::vec3 vel;
