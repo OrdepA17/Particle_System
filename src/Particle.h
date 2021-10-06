@@ -23,7 +23,11 @@ class Particle{
 		void draw();		
 		void increaseSize();
 		void decreaseSize();
-		
+		void speedIncrease(float);
+		void speedDecrease(float);
+
+
+
 		glm::vec3 pos;
 		glm::vec3 vel;
 		glm::vec3 frc;
@@ -31,7 +35,8 @@ class Particle{
 		float drag; 
 		float uniqueVal;
 		float scale;
-		
+		float defaultSpeed=1;
+
 		particleMode mode;
 		
 		vector <glm::vec3> * attractPoints; 

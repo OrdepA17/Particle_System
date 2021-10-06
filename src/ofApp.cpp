@@ -64,7 +64,7 @@ void ofApp::draw(){
 	}
 
 	ofSetColor(230);	
-	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.\nPress A to pause, then again to unpause", 10, 20);
+	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.\nPress A to pause, then again to unpause\nPress I or D to alter the sizes.\nPress F or S to alter the speeds.", 10, 20);
 
 }
 
@@ -98,12 +98,12 @@ void ofApp::keyPressed(int key){
 	}
 
 	if( key == 'a' || key == 'A'){
-		//Replaces the current mode with pause, turning particles white
+		//Pauses the program and turns the particles white
 		if( currentMode != PARTICLE_MODE_PAUSE){
 			previousMode = currentMode;
 			currentMode = PARTICLE_MODE_PAUSE;
 		}
-		//Sets the mode back to the original after pressing a to play
+		//Unpauses the program 
 		else{
 		
 			currentMode = previousMode;
@@ -126,8 +126,29 @@ void ofApp::keyPressed(int key){
 			x++;
 		}
 	}
+	if(key=='f'|| key=='F'){
+		speedIncrease();
+	}
+
+	if(key=='s'|| key=='S'){
+		speedDecrease();
+	}
 }
 
+//--------------------------------------------------------------
+void ofApp::speedIncrease(){
+	for (unsigned int i=0; i<p.size(); i++){
+		p[i].setMode(currentMode);
+		p[i].speedIncrease(4);
+	}
+}
+//--------------------------------------------------------------
+void ofApp::speedDecrease(){
+	for (unsigned int i=0; i<p.size(); i++){
+		p[i].setMode(currentMode);
+		p[i].speedDecrease(0.25);
+	}
+}
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 

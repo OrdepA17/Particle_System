@@ -139,7 +139,7 @@ void Particle::update(){
 	
 	// UPDATE OUR POSITION
 	
-	pos += vel; 
+	pos += vel*defaultSpeed; 
 	
 	
 	// LIMIT THE PARTICLES TO STAY ON SCREEN 
@@ -188,4 +188,22 @@ void Particle::increaseSize(){
 
 void Particle::decreaseSize(){
 	scale = scale / 3;
+}
+//--------------------------------------------------------------------
+void Particle::speedIncrease(float speedChange){
+	if (defaultSpeed==1){
+		speedChange=4;
+		defaultSpeed=defaultSpeed*speedChange;
+		}
+}
+
+void Particle::speedDecrease(float speedChange){
+	if (defaultSpeed==1 || speedChange==4){
+		speedChange= 0.25;
+		defaultSpeed=defaultSpeed*speedChange;
+	}
+	else{
+		speedChange=1;
+		defaultSpeed=speedChange;
+	}
 }
