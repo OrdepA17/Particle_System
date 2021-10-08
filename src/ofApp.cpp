@@ -79,7 +79,7 @@ void ofApp::draw(){
 		ofDrawBitmapString("Recording", ofGetWidth() - 90, ofGetHeight() - 750);
 	}
 	if(replay){
-		ofDrawBitmapString("Replaying", ofGetWidth() - 90, ofGetHeight() - 750);
+		ofDrawBitmapString("Replaying", ofGetWidth() - 90, ofGetHeight() - 650);
 	}
 
 	ofSetColor(230);	
@@ -89,6 +89,9 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+if(key == 'c' || key == 'C'){
+	replay = false;
+}
 	if(loopCount%150==0||!replay){
 	if( key == '1'){
 		currentMode = PARTICLE_MODE_ATTRACT;
