@@ -29,6 +29,9 @@ class ofApp : public ofBaseApp{
 		string currentModeStr; 
 		particleMode previousMode;
 		bool record = false;
+		bool replay=false;
+		unsigned index=0;
+		int loopCount=0;
 
 		vector <Particle> p;
 		vector <glm::vec3> attractPoints;

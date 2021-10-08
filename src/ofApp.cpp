@@ -42,8 +42,19 @@ void ofApp::update(){
 	for(unsigned int i = 0; i < attractPointsWithMovement.size(); i++){
 		attractPointsWithMovement[i].x = attractPoints[i].x + ofSignedNoise(i * 10, ofGetElapsedTimef() * 0.7) * 12.0;
 		attractPointsWithMovement[i].y = attractPoints[i].y + ofSignedNoise(i * -10, ofGetElapsedTimef() * 0.7) * 12.0;
+	}
+
+	if(replay){
+		if(loopCount%150==0){
+			keyPressed(rec[index]);
+			index++;
+		}
+	}
+	if(index==rec.size()){
+		loopCount=0;
+		index=0;
 	}	
-	
+	loopCount++;
 }
 
 //--------------------------------------------------------------
@@ -67,14 +78,18 @@ void ofApp::draw(){
 	if(record){
 		ofDrawBitmapString("Recording", ofGetWidth() - 90, ofGetHeight() - 750);
 	}
+	if(replay){
+		ofDrawBitmapString("Replaying", ofGetWidth() - 90, ofGetHeight() - 750);
+	}
 
 	ofSetColor(230);	
-	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.\nPress A to pause, then again to unpause\nPress I or D to alter the sizes.\nPress F or S to alter the speeds.\nPress R to record.", 10, 20);
+	ofDrawBitmapString(currentModeStr + "\n\nSpacebar to reset. \nKeys 1-4 to change mode.\nPress A to pause, then again to unpause\nPress I or D to alter the sizes.\nPress F or S to alter the speeds.\nPress R to record.\nPress P to replay the recording.\nPress C to cancel the replay.", 10, 20);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+	if(loopCount%150==0||!replay){
 	if( key == '1'){
 		currentMode = PARTICLE_MODE_ATTRACT;
 		currentModeStr = "1 - PARTICLE_MODE_ATTRACT: attracts to mouse"; 
@@ -105,7 +120,7 @@ void ofApp::keyPressed(int key){
 		key = 'a';
 		if(record) rec.push_back(key);
 	}
-
+	
 	if( key == 'a' || key == 'A'){
 		//Pauses the program and turns the particles white
 		if( currentMode != PARTICLE_MODE_PAUSE){
@@ -116,7 +131,7 @@ void ofApp::keyPressed(int key){
 		//Unpauses the program 
 		else{
 			currentMode = previousMode;
-			if(record) rec.push_back(key);
+			if(record) rec.push_back(key); 
 		}
 	}
 
@@ -124,18 +139,18 @@ void ofApp::keyPressed(int key){
 		int x = 0;
 		while ( x < p.size()){
 			p[x].increaseSize();
-			x++;
-			if(record) rec.push_back(key);
+			x++;	
 		}
+		if(record) rec.push_back(key);
 	}
 
 	if ( key == 'd' || key == 'D'){
 		int x = 0;
 		while ( x < p.size()){
 			p[x].decreaseSize();
-			x++;
-			if(record) rec.push_back(key);
+			x++;	
 		}
+		if(record) rec.push_back(key); 
 	}
 	if(key=='f'|| key=='F'){
 		speedIncrease();
@@ -150,6 +165,8 @@ void ofApp::keyPressed(int key){
 	if(key == 'r' || key == 'R'){
 		record = !record;
 		if(record) rec.clear();
+	}
+	if(key=='p'||key=='P'){replay=true;}
 	}
 }
 
