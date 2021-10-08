@@ -191,14 +191,14 @@ void Particle::decreaseSize(){
 }
 //--------------------------------------------------------------------
 void Particle::speedIncrease(float speedChange){
-	if (defaultSpeed==1){
+	if (defaultSpeed == 1 || defaultSpeed == 0.25){
 		speedChange=4;
 		defaultSpeed=defaultSpeed*speedChange;
 		}
 }
 
 void Particle::speedDecrease(float speedChange){
-	if (defaultSpeed==1 || speedChange==4){
+	if (defaultSpeed == 1 || defaultSpeed == 4){
 		speedChange= 0.25;
 		defaultSpeed=defaultSpeed*speedChange;
 	}
