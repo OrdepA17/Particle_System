@@ -165,7 +165,7 @@ if(key == 'c' || key == 'C'){
 		if(record) rec.push_back(key);
 	}
 
-	if(key == 'r' || key == 'R'){
+	if(key == 'r' || key == 'R' && key != 'r'){
 		record = !record;
 		if(record) rec.clear();
 	}
