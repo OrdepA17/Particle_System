@@ -25,3 +25,7 @@ If you have any notes to add for your TA about the project specs or creative add
 
 New Particle shape:
 You can change the shape of the particles by pressing the 5 or 6 key. 5) changes the particles to squares and 6) changes the particles back to circles. This was achieved by creating a new set of enums inside the Particle.h file to be able to change the particles without altering the modes themselves and this results in being able to change between the two shapes and adjust them no matter the mode.
+
+PA1 Contributors:
+Name: Ordep Agustin                 Name: Gabriel Roman
+Email: ordep.agustin@upr.edu        Email: gabriel.roman7@upr.edu
