@@ -9,7 +9,11 @@ Particle::Particle(){
 void Particle::setMode(particleMode newMode){
 	mode = newMode;
 }
-
+//------------------------------------------------------------------
+void Particle::setShapeMode(ShapeMode newShape){
+	//Makes it possible to change the spapes of the particles without altering the modes
+	currentShapeMode=newShape;
+}
 //------------------------------------------------------------------
 void Particle::setAttractPoints( vector <glm::vec3> * attract ){
 	attractPoints = attract;
@@ -177,11 +181,21 @@ if( mode == PARTICLE_MODE_ATTRACT ){
 	else if( mode == PARTICLE_MODE_NEAREST_POINTS ){
 		ofSetColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255));
 	}
-			
-	ofDrawCircle(pos.x, pos.y, scale * 4.0);
+
+	//Alters the way the particles are drawn depending on the shape mode
+	if(currentShapeMode==PARTICLE_SHAPE_CIRCLE)
+	{
+		ofDrawCircle(pos.x, pos.y, scale * 4.0);
+	}		
+	else if(currentShapeMode==PARTICLE_SHAPE_SQUARE)
+	{
+		ofDrawRectangle(pos.x,pos.y, scale*9.0, scale*9.0);
+	}
+	
 }
 
 //--------------------------------------------------------------------
+//Alters the sizes of the particles
 void Particle::increaseSize(){
 	scale = scale * 3;
 }
@@ -190,17 +204,23 @@ void Particle::decreaseSize(){
 	scale = scale / 3;
 }
 //--------------------------------------------------------------------
+//Alters the speeds of the particles
 void Particle::speedIncrease(float speedChange){
 	if (defaultSpeed == 1 || defaultSpeed == 0.25){
 		speedChange=4;
-		defaultSpeed=defaultSpeed*speedChange;
+		defaultSpeed*=speedChange;
 		}
+	else{
+		speedChange=1;
+		defaultSpeed=speedChange;
+	}
 }
 
 void Particle::speedDecrease(float speedChange){
-	if (defaultSpeed == 1 || defaultSpeed == 4){
+	if (defaultSpeed == 1 || defaultSpeed == 4)
+	{
 		speedChange= 0.25;
-		defaultSpeed=defaultSpeed*speedChange;
+		defaultSpeed*=speedChange;
 	}
 	else{
 		speedChange=1;

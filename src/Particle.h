@@ -9,12 +9,18 @@ enum particleMode{
 	PARTICLE_MODE_PAUSE
 };
 
+enum ShapeMode{
+	PARTICLE_SHAPE_CIRCLE=0,
+	PARTICLE_SHAPE_SQUARE
+};
+
 class Particle{
 
 	public:
 		Particle();
 		
 		void setMode(particleMode newMode);	
+		void setShapeMode(ShapeMode newShape);
 		void setAttractPoints( vector <glm::vec3> * attract );
 		void attractToPoint(int, int);
 		void repelFromPoint(int, int);
@@ -38,6 +44,7 @@ class Particle{
 		float defaultSpeed=1;
 
 		particleMode mode;
+		ShapeMode currentShapeMode;
 		
 		vector <glm::vec3> * attractPoints; 
 };

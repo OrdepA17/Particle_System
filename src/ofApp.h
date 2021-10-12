@@ -26,7 +26,9 @@ class ofApp : public ofBaseApp{
 		void speedDecrease();
 
 		particleMode currentMode;
-		string currentModeStr; 
+		ShapeMode shapeMode;
+		string currentModeStr;
+		string shapeModeStr; 
 		particleMode previousMode;
 		bool record = false;
 		bool replay=false;
